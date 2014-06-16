@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+
+
+<input id="user" type="text" placeholder="Username" name="user">
+<input id="pass" type="password" placeholder="Password" name="pass">
+<input type="button" value="Save" onClick="savePrefs()" />
+<input type="button" value="Load" onClick="loadPrefs()" />
+
+<input type="button" value="Toast" onClick="showAndroidToast('Hello from JavaScript!!!')">
+<input type="button" value="Vibrate" onClick="vibrate(500)">
+
+<br>
+<br>
+<br>
+<br>
+<input id="phoneNumber" type="number" placeholder="Phone Number" name="phoneNumber">
+<input id="message" type="text" placeholder="Message (160 Characters)" maxlength="160" name="message">
+<input type="button" value="SendSMS" onClick="sendSMS(document.getElementById('phoneNumber').value, document.getElementById('message').value)">
+<script type="text/javascript">
+
+    //These are some basic functions to demonstrate the ease of calling Java methods from JS
+    function showAndroidToast(toast) {
+        Android.showToast(toast);
+    }
+
+    function savePrefs(){
+        Android.SavePreferences("user", document.getElementById('user').value);
+        Android.SavePreferences("pass", document.getElementById('pass').value);
+    }
+
+    function loadPrefs(){
+        var user = Android.LoadPreferences("user");
+        var pass = Android.LoadPreferences("pass");
+
+        showAndroidToast("Username: " + user + "\nPassword: " + pass);
+
+
+    }
+
+    function vibrate(milliseconds){
+        Android.Vibrate(milliseconds);
+    }
+
+    function sendSMS(phoneNumber, message){
+
+        Android.SendSMS(phoneNumber, message);
+    }
+</script>
+
+</body>
+</html>
