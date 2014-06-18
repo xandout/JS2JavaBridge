@@ -15,6 +15,7 @@
 
 <input type="button" value="Toast" onClick="showAndroidToast('Hello from JavaScript!!!')">
 <input type="button" value="Vibrate" onClick="vibrate(500)">
+<input type="button" value="GetLoc" onClick="getLocation()">
 
 <br>
 <br>
@@ -51,6 +52,12 @@
     function sendSMS(phoneNumber, message){
 
         Android.SendSMS(phoneNumber, message);
+    }
+
+    function getLocation(){
+        var loc = Android.getLocation();
+        showAndroidToast(loc);
+
     }
 </script>
 
