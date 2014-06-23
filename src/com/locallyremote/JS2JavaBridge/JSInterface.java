@@ -3,6 +3,7 @@ package com.locallyremote.JS2JavaBridge;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
@@ -17,17 +18,17 @@ import java.util.Calendar;
 public class JSInterface {
 
     Context mContext;
-
-
+    GPS here;
+    LocationManager locationManager;
     JSInterface(Context c) {
         mContext = c;
+
     }
 
 
     public void showToast(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
     }
-
 
     public void SavePreferences(String key, String value) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
@@ -52,16 +53,26 @@ public class JSInterface {
     }
 
     public String getLocation() {
-        Log.w("BroadPlex", "JSI.getLocation() called");
-        String loc;
-        GeoCoord geo = new GeoCoord(mContext);
-        Location mLocation = geo.getGPSLocation();
+        Log.w("JSI", "JSI.getLocation() called");
+        return Double.toString(here.myLoc.getLatitude());
 
-        loc = Double.toString(mLocation.getLatitude()) + ", " + Double.toString(mLocation.getLongitude());
-        geo.stopUsingGPS();
-        return loc;
+    }
 
+    public void PrepareGPS(long time, float distance){
+        here = new GPS(mContext);
+        locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                time,
+                distance,
+                here
+        );
 
+    }
+
+    public void StopGPS(){
+        locationManager.removeUpdates(here);
+        here = null;
     }
 
 

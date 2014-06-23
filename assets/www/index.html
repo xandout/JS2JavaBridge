@@ -15,6 +15,9 @@
 
 <input type="button" value="Toast" onClick="showAndroidToast('Hello from JavaScript!!!')">
 <input type="button" value="Vibrate" onClick="vibrate(500)">
+<input type="button" value="PrepGPS" onClick="PrepGPS(0,0)">
+<input type="button" value="StopGPS" onClick="StopGPS()">
+
 <input type="button" value="GetLoc" onClick="getLocation()">
 
 <br>
@@ -25,7 +28,7 @@
 <input id="message" type="text" placeholder="Message (160 Characters)" maxlength="160" name="message">
 <input type="button" value="SendSMS" onClick="sendSMS(document.getElementById('phoneNumber').value, document.getElementById('message').value)">
 <script type="text/javascript">
-
+    var isGPSReady = 0;
     //These are some basic functions to demonstrate the ease of calling Java methods from JS
     function showAndroidToast(toast) {
         Android.showToast(toast);
@@ -55,9 +58,24 @@
     }
 
     function getLocation(){
-        var loc = Android.getLocation();
-        showAndroidToast(loc);
+        if(isGPSReady){
+            var loc = Android.getLocation();
+            showAndroidToast(loc);
+        } else {
+            PrepGPS(0,0);
+        }
 
+
+    }
+
+    function PrepGPS(time, distance){
+        Android.PrepareGPS(time, distance);
+        isGPSReady = 1;
+    }
+
+    function StopGPS(){
+        Android.StopGPS();
+        isGPSReady = 0;
     }
 </script>
 
