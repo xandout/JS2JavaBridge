@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-/**
- * Created by Mitchell on 6/23/2014.
- */
+
 public class GPS implements LocationListener {
     private Context mContext;
     public Location myLoc = new Location(LocationManager.GPS_PROVIDER);

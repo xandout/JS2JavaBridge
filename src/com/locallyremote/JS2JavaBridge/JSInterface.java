@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
@@ -14,11 +13,8 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.Calendar;
 
-/**
- * Created by Mitchell on 6/16/2014.
- */
+
 public class JSInterface {
 
     Context mContext;
@@ -67,7 +63,7 @@ public class JSInterface {
         boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!isGPSEnabled) {
             // GPS is not enabled
-            Toast.makeText(mContext, "GPS Not Available", Toast.LENGTH_LONG);
+            Toast.makeText(mContext, "GPS Not Available", Toast.LENGTH_LONG).show();
             showGPSAlert();
         } else {
             here = new GPS(mContext);
