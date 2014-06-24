@@ -24,11 +24,11 @@ public class JSInterface {
     Context mContext;
     GPS here;
     LocationManager locationManager;
+
     JSInterface(Context c) {
         mContext = c;
 
     }
-
 
     public void showToast(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
@@ -62,7 +62,7 @@ public class JSInterface {
 
     }
 
-    public void PrepareGPS(long time, float distance){
+    public void PrepareGPS(long time, float distance) {
         locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
         boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!isGPSEnabled) {
@@ -80,12 +80,12 @@ public class JSInterface {
         }
     }
 
-    public void StopGPS(){
+    public void StopGPS() {
         locationManager.removeUpdates(here);
         here = null;
     }
 
-    public void showGPSAlert(){
+    public void showGPSAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         // Setting Dialog Title
@@ -96,7 +96,7 @@ public class JSInterface {
 
         // On pressing Settings button
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
+            public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
             }
@@ -127,6 +127,5 @@ public class JSInterface {
             e.printStackTrace();
         }
     }
-
 
 }
