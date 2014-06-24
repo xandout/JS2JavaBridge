@@ -57,7 +57,7 @@ public class JSInterface {
     }
 
     public String getLocation() {
-        Log.w("BroadPlex", "JSI.getLocation() called");
+        Log.w("JSI", "JSI.getLocation() called");
         return Double.toString(here.location.getLatitude());
 
     }
@@ -117,7 +117,7 @@ public class JSInterface {
         String url = "http://checkin.locallyremote.com/broadplex.php?id=" + id + "&lat=" +
                 Double.toString(here.location.getLatitude()) + "&lng=" + Double.toString(here.location.getLongitude()) +
                 "&date=" + (System.currentTimeMillis() / 1000);
-        Log.w("BroadPlex", url);
+        Log.w("JSI", url);
         DefaultHttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(url);
 

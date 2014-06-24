@@ -18,21 +18,21 @@ public class GPS implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
-        Log.w("BroadPlex", "Location Changed");
+        Log.w("JSI", "Location Changed");
     }
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
-        Log.w("BroadPlex", "Status Changed");
+        Log.w("JSI", "Status Changed");
     }
 
     @Override
     public void onProviderEnabled(String s) {
-        Log.w("BroadPlex", "GPS Enabled");
+        Log.w("JSI", "GPS Enabled");
     }
 
     @Override
     public void onProviderDisabled(String s) {
-        Log.w("BroadPlex", "GPS Disabled");
+        Log.w("JSI", "GPS Disabled");
     }
 }
