@@ -10,15 +10,15 @@ import android.widget.Toast;
 
 
 public class GPS implements LocationListener {
+    public Location location = new Location(LocationManager.GPS_PROVIDER);
     private Context mContext;
-    public Location myLoc = new Location(LocationManager.GPS_PROVIDER);
     public GPS(Context context){
         mContext = context;
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        myLoc = location;
+        this.location = location;
         Log.w("BroadPlex", "Location Changed");
     }
 
