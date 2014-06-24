@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <title></title>
 
 </head>
@@ -18,8 +19,11 @@
 <input type="button" value="StopGPS" onClick="StopGPS()">
 <input type="button" value="GetLoc" onClick="getLocation()">
 <input type="button" value="SendLoc" onClick="sendGPS(1)">
+<input type="button" value="LogGPS" onclick="LogGPS()">
 <br>
 <br>
+
+<div id="debug" style="backgroud-color=red;">Debug</div>
 <br>
 <br>
 <input id="phoneNumber" type="number" placeholder="Phone Number" name="phoneNumber">
@@ -56,27 +60,26 @@
     }
 
     function getLocation(){
-        if(isGPSReady){
-            var loc = Android.getLocation();
-            showAndroidToast(loc);
-        } else {
-            Android.PrepareGPS(10,1);
-            isGPSReady = 1;
-            getLocation();
-        }
 
+        showAndroidToast(GPS.OneOff());
 
     }
 
 
 
     function StopGPS(){
-        Android.StopGPS();
+        GPS.StopGPS();
         isGPSReady = 0;
     }
 
     function sendGPS(id){
-        Android.sendGPS(id);
+        GPS.sendGPS(id);
+    }
+
+    function LogGPS(){
+        setInterval(function(){
+            sendGPS(1);
+        }, 10000);
     }
 </script>
 

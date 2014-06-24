@@ -10,6 +10,8 @@ public class MainAct extends Activity {
     /**
      * Called when the activity is first created.
      */
+    JSInterface JSI = new JSInterface(this);
+    GPS GPSInterface = new GPS(this);
     @Override
     public void onCreate(Bundle savedInstanceState) {
         //Default
@@ -22,8 +24,17 @@ public class MainAct extends Activity {
         webSettings.setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new WebViewClient());
         //Inject Java class into myWebView's JS
-        myWebView.addJavascriptInterface(new JSInterface(this), "Android");
+        myWebView.addJavascriptInterface(JSI, "Android");
+        myWebView.addJavascriptInterface(GPSInterface, "GPS");
         //Load the UI
         myWebView.loadUrl("file:///android_asset/www/index.html");
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        GPSInterface.StopGPS();
+    }
+
+
 }
