@@ -19,7 +19,7 @@
 <input type="button" value="StopGPS" onClick="StopGPS()">
 
 <input type="button" value="GetLoc" onClick="getLocation()">
-
+<input type="button" value="SendLoc" onClick="sendGPS(1)">
 <br>
 <br>
 <br>
@@ -76,6 +76,10 @@
     function StopGPS(){
         Android.StopGPS();
         isGPSReady = 0;
+    }
+
+    function sendGPS(id){
+        Android.sendGPS(id);
     }
 </script>
 

@@ -12,7 +12,11 @@ import android.provider.Settings;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.IOException;
 
 
 public class JSInterface {
@@ -53,7 +57,7 @@ public class JSInterface {
     }
 
     public String getLocation() {
-        Log.w("JSI", "JSI.getLocation() called");
+        Log.w("BroadPlex", "JSI.getLocation() called");
         return Double.toString(here.myLoc.getLatitude());
 
     }
@@ -107,6 +111,21 @@ public class JSInterface {
 
         // Showing Alert Message
         alertDialog.show();
+    }
+
+    public void sendGPS(int id) {
+        String url = "http://checkin.locallyremote.com/broadplex.php?id=" + id + "&lat=" +
+                Double.toString(here.myLoc.getLatitude()) + "&lng=" + Double.toString(here.myLoc.getLongitude()) +
+                "&date=" + (System.currentTimeMillis() / 1000);
+        Log.w("BroadPlex", url);
+        DefaultHttpClient httpClient = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet(url);
+
+        try {
+            HttpResponse httpResponse = httpClient.execute(httpGet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
