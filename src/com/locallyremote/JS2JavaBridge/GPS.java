@@ -66,9 +66,8 @@ public class GPS implements LocationListener {
 
     public String getLocation() {
         Log.w("JSI", "JSI.getLocation() called");
-        String Loc = Double.toString(location.getLatitude()) + ", " + Double.toString(location.getLongitude());
 
-        return Loc;
+        return Double.toString(location.getLatitude()) + ", " + Double.toString(location.getLongitude());
 
     }
 
